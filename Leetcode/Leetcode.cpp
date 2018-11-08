@@ -6,6 +6,9 @@
 using namespace std;
 
 bool Find(int target, vector<vector<int> > array) {
+
+	int offsetX, offsetY;
+
 	for (int i = 0; i < array.size(); i++) {
 		for (int j = 0; j < array[i].size(); j++) {
 			cout << array[i][j] << endl;
