@@ -5,42 +5,40 @@
 
 using namespace std;
 
-void replaceSpace(char *str, int length) {
-	char *p = str;
-	char *q = str + length;
-	char *end = str + length;
-	while (*p != '\0') {
+
+struct ListNode {
+    int val;
+    struct ListNode *next;
+    ListNode(int x) :
+            val(x), next(NULL) {
+    }
+};
+
+
+
+vector<int> printListFromTailToHead(ListNode* head) {
+	vector<int> answerList;
+	ListNode *p = head, *q = p->next;
+	while (p != NULL) {
 		
-		if ((int)*p == 32) {
-			q = end;
-			while (p != q) {
-				*(q + 2) = *q;
-				q--;
-			}
-			end += 2;
-			*p = '%';
-			*(p + 1) = '2';
-			*(p + 2) = '0';
-			p++;
-		}
-		p++;
 	}
+	return answerList;
 }
 
 int main()
 {
-	char str[100] = "iii jjj kkk ";
-	
-	//char *p = str;
-	//cout << (int)*(p + 11);
-
-	replaceSpace(str, 12);
-	char *p = str;
-	while (*p != '\0') {
-		cout << *p << endl;
-		p++;
+	vector<int> list = { 1, 2, 3, 4, 5 };
+	ListNode *head = new ListNode(1);
+	ListNode *p = head;
+	for (int i = 1; i < list.size(); i ++) {
+		ListNode *node = new ListNode(list[i]);
+		node->next = p->next;
+		p->next = node;
+		p = node;
 	}
-	
+	for (p = head; p != NULL; p = p->next) {
+		cout << p->val << " -> ";
+	}
 	return 0;
 }
 
