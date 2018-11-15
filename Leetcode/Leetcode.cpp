@@ -18,9 +18,19 @@ struct ListNode {
 
 vector<int> printListFromTailToHead(ListNode* head) {
 	vector<int> answerList;
-	ListNode *p = head, *q = p->next;
-	while (p != NULL) {
-		
+	ListNode *p = head, *q = NULL, *t = p->next;
+	if (head == NULL)
+		return answerList;
+	while (t != NULL) {
+		p->next = q;
+		q = p;
+		p = t;
+		t = t->next;
+	}
+	p->next = q;
+	while (p) {
+		answerList.push_back(p->val);
+		p = p->next;
 	}
 	return answerList;
 }
@@ -39,6 +49,8 @@ int main()
 	for (p = head; p != NULL; p = p->next) {
 		cout << p->val << " -> ";
 	}
+	cout << endl;
+	printListFromTailToHead(head);
 	return 0;
 }
 
