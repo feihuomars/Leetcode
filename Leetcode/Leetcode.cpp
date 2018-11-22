@@ -28,6 +28,8 @@ TreeNode* reConstructBinaryTree(vector<int> pre, vector<int> vin) {
 	}
 	
 	treeNode->left = reConstructBinaryTree(pre, leftTree);
+	if (treeNode->left != NULL)
+		pre.erase(pre.begin());
 	treeNode->right = reConstructBinaryTree(pre, rightTree);
 	return treeNode;
 }
@@ -39,8 +41,8 @@ int main()
 	
 	//vector<int> pre = { 1, 2, 4, 5, 3, 6, 7 };
 	//vector<int> vin = { 4, 2, 5, 1, 3, 7, 6 };
-	vector<int> pre = { 1, 2, 3 };
-	vector<int> vin = { 2, 1, 3 };
+	vector<int> pre = { 1, 2, 3, 4};
+	vector<int> vin = { 2, 1, 3, 4 };
 	bTree = reConstructBinaryTree(pre, vin);
 	return 0;
 }
