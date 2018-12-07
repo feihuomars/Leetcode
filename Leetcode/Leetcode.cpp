@@ -5,29 +5,41 @@
 
 using namespace std;
 
-int jumpFloorII(int number) {
-	if (number <= 0)
-		return 0;
-	if (number == 1)
-		return 1;
-	if (number == 2)
-		return 2;
-	vector<int> num;
-	num.push_back(1);
-	num.push_back(1);
-	int sum = 0;
-	for (int i = 2; i <= number; i++) {
-		for (int j = 0; j < i; j++) {
-			sum = sum + num.at(j);
+class Solution {
+private:
+	stack<int> stack1;
+	stack<int> stack2;
+
+public:
+	void push(int value) {
+		stack1.push(value);
+		if (stack2.size() == 0) {
+			stack2.push(value);
 		}
-		num.push_back(sum);
+		else if (value < stack2.top()) {
+			stack2.push(value);
+		}
 	}
-	return num[number];
-}
+	void pop() {
+		stack1.pop();
+	}
+	int top() {
+		return stack1.top();
+	}
+	int min() {
+		return stack2.top();
+	}
+};
+
 
 int main()
 {
-	jumpFloorII(4);
+	Solution solution;
+	for (int i = 0; i < 10; i++) {
+		solution.push(rand() % 100);
+	}
+	
+	int a = solution.min();
 	return 0;
 }
 
