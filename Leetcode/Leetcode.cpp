@@ -5,41 +5,30 @@
 
 using namespace std;
 
-class Solution {
-private:
-	stack<int> stack1;
-	stack<int> stack2;
-
-public:
-	void push(int value) {
-		stack1.push(value);
-		if (stack2.size() == 0) {
-			stack2.push(value);
-		}
-		else if (value < stack2.top()) {
-			stack2.push(value);
+bool IsPopOrder(vector<int> pushV, vector<int> popV) {
+	if (pushV.size() == 0)
+		return false;
+	int size = pushV.size(), j = 0;
+	for (int i = size - 1; i > 0; i--) {
+		if (pushV[i] == popV[size - i - 1]) {
+			j = i;
+			break;
 		}
 	}
-	void pop() {
-		stack1.pop();
+	if (j == 0)
+		return true;
+	for (j; j > 0; j--) {
+		if (pushV[j] != popV[size - j - 1])
+			return false;
 	}
-	int top() {
-		return stack1.top();
-	}
-	int min() {
-		return stack2.top();
-	}
-};
+	return true;
+}
 
 
 int main()
 {
-	Solution solution;
-	for (int i = 0; i < 10; i++) {
-		solution.push(rand() % 100);
-	}
-	
-	int a = solution.min();
+	vector<int> pushV = { 1, 2, 3, 4, 5 }, popV = {4, 3, 5, 1, 2};
+	bool i = IsPopOrder(pushV, popV);
 	return 0;
 }
 
